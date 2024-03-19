@@ -1,185 +1,97 @@
-public class Policy {
-   
+class Policy {
+    private int policyNum;
+    private String providerName;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String smokingStatus;
+    private double height;
+    private double weight;
+    private double bmi;
+    private double price;
 
+    public Policy() {
+        this.policyNum = 0;
+        this.providerName = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.age = 0;
+        this.smokingStatus = "";
+        this.height = 0;
+        this.weight = 0;
+        this.bmi = 0;
+        this.price = 0;
+    }
 
-//An insurance Policy has the following attributes:
-   private String policyNum;
-   private Stirng providerName; 
-   private String firstName;
-   private String lastName;
-   private int age;
-   private String smokingStat;
-   private double height;
-   private double weight;
-   private double bmi;
-   private double insurePrice;
+    public Policy(int policyNum, String providerName, String firstName, String lastName, int age,
+                  String smokingStatus, double height, double weight) {
+        this.policyNum = policyNum;
+        this.providerName = providerName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.smokingStatus = smokingStatus;
+        this.height = height;
+        this.weight = weight;
+        calculateBMI();
+        calculatePrice();
+    }
 
+    public int getPolicyNum() {
+        return policyNum;
+    }
 
+    public String getProviderName() {
+        return providerName;
+    }
 
-//no-arg constructors
+    public String getFirstName() {
+        return firstName;
+    }
 
-   public Policy() {
-      this.policyNum = "";
-      this.providerName = "";
-      this.firstName = "";
-      this.lastName = "";
-      this.age = 0;
-      this.smokingStat = "";
-      this.height = 0.0; 
-      this.weight = 0.0;
-      this.bmi = 0.0;
-      this.insurePrice = 0.0;
-   
-   
-   } 
-   
-   //Constructors with arguements
-   public Policy(String policyNum, String providerName, String firstName, String lastName, int age, String smokingStat, double height, double weight) {
-      this.policyNum = policyNum;
-      this.providerName = providerName;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.age = age;
-      this.smokingStat = smokingStat;
-      this.height = height;
-      this.weight = weight;
-      calculateBMI();
-      calculateInsurancePrice();
-   
-   }
-   
-   // Setters and Getters
-   public String getPolicyNumber() {
-   
-      return policyNum;
-   
-   }
-   
-   public void setPolicyNumber(String policyNum) {
-      
-      this.policy = policyNum;
-      
-   
-   }
-   
-   public String getProviderName(){
-      return providerName;
-   
-   }
-   
-   public void setProviderName(String providerName){
-      this.providerName = providerName;
-   
-   }
-   
-   public String getFirstName() {
-      return firstName;
-   
-   }
-   
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
-   
-   public String getLastName() {
-      return lastName;
-   
-   
-   }
-   
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
-   
-   public int getAge() {
-      return age;
-   
-   }
-   
-   public void setAge(int age) {
-      this.age = age;
-   
-   }
-   
-  public String getSmokingStatus() {
-   return smokingStat;
-  
-  
-  }
-  
-  public void setSmokingStatus(String smokingStat) {
-   this.smokingStat = smokingStat;
-  
-  }
-  
-  public double getHeight() {
-   return height;
-  
-  }
-  
-  public void setHeight(double height) {
-   this.height = height;
-  
-  }
-  
-  public double getWeight(){
-   return weight;
-  
-  }
-  
-  public void setWeight(double weight) {
-   this.weight = weight;
-  
-  
-  }
-  
-  public double getBmi() {
-   return bmi;
-  
-  
-  }
-  
-  public double getInsurancePrice() {
-   return insurePrice;
-  
-  
-  }
-  
-  private void calcualateBMI() {
-   this.bmi = (weight * 703) / (height * weight);
-  
-  }
-  
-  
-  //Method to calculate insurance price
-  private void calculateInsurancePrice() {
-  
-   insurePrice = 600;
-   
-   
-   //Additonal fee for people over the age of 50
-   if(age > 50) {
-      insurncePrice += 75;
-   
-   }
-   
-   //Additional fee for smokers
-   if(smokingStat.equalsIgnoreCse("smoker")) {
-      insurePrice += 100;
-   
-   }
-   
-   //Additional fee for BMI over 35
-   if (bmi > 35) {
-      insurePrice += (bmi - 35) * 20; 
-   
-   
-   }
-  
-  }
-  
-  
+    public String getLastName() {
+        return lastName;
+    }
 
+    public int getAge() {
+        return age;
+    }
 
+    public String getSmokingStatus() {
+        return smokingStatus;
+    }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getBMI() {
+        return bmi;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    private void calculateBMI() {
+        bmi = (weight * 703) / (height * height);
+    }
+
+    private void calculatePrice() {
+        price = 600; // Base fee
+        if (age > 50) {
+            price += 75; // Additional fee for age over 50
+        }
+        if (smokingStatus.equalsIgnoreCase("smoker")) {
+            price += 100; // Additional fee for smokers
+        }
+        if (bmi > 35) {
+            calculateBMI(); // Recalculate BMI
+            price += (bmi - 35) * 20; // Additional fee for BMI over 35
+        }
+    }
 }
